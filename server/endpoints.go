@@ -26,13 +26,7 @@ func (e Endpoints) Admin(ctx context.Context, targetAdminName string) (string, s
 		TargetAdminName: targetAdminName,
 	}
 	resp, _ := e.AdminEndpoint(ctx, req)
-	//if err != nil {
-	//	return "", err
-	//}
 	adminResp := resp.(GetAdminInfoResponse)
-	//if adminResp.Err != "" {
-	//	return "", errors.New(adminResp.Err)
-	//}
 	return adminResp.Name, adminResp.Age
 }
 

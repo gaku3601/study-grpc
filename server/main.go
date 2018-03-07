@@ -16,17 +16,14 @@ import (
 func main() {
 	ctx := context.Background()
 
-	// init lorem service
 	var svc AdminService
 	svc = impl{}
 	errChan := make(chan error)
 
-	// creating Endpoints struct
 	endpoints := Endpoints{
 		AdminEndpoint: MakeGetAdminInfoEndpoint(svc),
 	}
 
-	//execute grpc server
 	go func() {
 		listener, err := net.Listen("tcp", ":19003")
 		if err != nil {
