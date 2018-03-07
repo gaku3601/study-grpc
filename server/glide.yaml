@@ -1,0 +1,13 @@
+package: github.com/gaku3601/study-grpc/server
+import:
+- package: github.com/golang/protobuf
+  version: ^1.0.0
+  subpackages:
+  - proto
+- package: golang.org/x/net
+  subpackages:
+  - context
+- package: google.golang.org/grpc
+  version: ^1.10.0
+- package: github.com/go-kit/kit
+  version: ^0.6.0

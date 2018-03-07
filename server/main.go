@@ -1,22 +1,54 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"net"
+	"os"
+	"os/signal"
+	"syscall"
+
+	"golang.org/x/net/context"
 
 	pb "github.com/gaku3601/study-grpc/server/pb"
 	"google.golang.org/grpc"
 )
 
 func main() {
-	listenPort, err := net.Listen("tcp", ":19003")
-	if err != nil {
-		log.Fatalln(err)
-	}
-	server := grpc.NewServer()
-	adminService := &AdminService{}
+	ctx := context.Background()
 
-	//サービスを登録する
-	pb.RegisterAdminServer(server, adminService)
-	server.Serve(listenPort)
+	// init lorem service
+	var svc AdminService
+	svc = impl{}
+	errChan := make(chan error)
+
+	// creating Endpoints struct
+	endpoints := Endpoints{
+		AdminEndpoint: MakeGetAdmininfoEndpoint(svc),
+	}
+
+	//execute grpc server
+	go func() {
+		listener, err := net.Listen("tcp", ":19003")
+		if err != nil {
+			errChan <- err
+			return
+		}
+		handler := NewGRPCServer(ctx, endpoints)
+		gRPCServer := grpc.NewServer()
+		pb.RegisterAdminServer(gRPCServer, handler)
+		errChan <- gRPCServer.Serve(listener)
+	}()
+
+	go func() {
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
+		errChan <- fmt.Errorf("%s", <-c)
+	}()
+
+	go func() {
+		c := make(chan os.Signal, 1)
+		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
+		errChan <- fmt.Errorf("%s", <-c)
+	}()
+	fmt.Println(<-errChan)
 }

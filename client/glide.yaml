@@ -1,0 +1,7 @@
+package: github.com/gaku3601/study-grpc/client
+import:
+- package: github.com/gaku3601/study-grpc
+  subpackages:
+  - server/pb
+- package: google.golang.org/grpc
+  version: ^1.10.0

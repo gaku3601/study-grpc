@@ -1,18 +1,24 @@
 package main
 
 import (
-	"context"
 	"fmt"
-
-	pb "github.com/gaku3601/study-grpc/server/pb"
 )
 
-type AdminService struct{}
+type AdminService interface {
+	GetAdminInfo(string) (*Admin, error)
+}
 
-func (a *AdminService) GetAdminInfo(ctx context.Context, message *pb.GetAdminInfoMessage) (*pb.AdminInfoResponse, error) {
-	fmt.Println(message.TargetAdminName)
-	return &pb.AdminInfoResponse{
+type impl struct{}
+
+func (impl) GetAdminInfo(targetAdminName string) (*Admin, error) {
+	fmt.Println(targetAdminName)
+	return &Admin{
 		Name: "gaku",
 		Age:  "26",
 	}, nil
+}
+
+type Admin struct {
+	Name string `json:"name"`
+	Age  string `json:"age"`
 }

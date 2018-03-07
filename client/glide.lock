@@ -1,0 +1,62 @@
+hash: fd6f271f78f2ddd13ae7764f15df268dd78ec14d5e58c371312e723d60b298d0
+updated: 2018-03-08T07:51:17.662433891+09:00
+imports:
+- name: github.com/gaku3601/study-grpc
+  version: 8538b045879d7ad8bf195d784e57e506e7e6ffe4
+  subpackages:
+  - server/pb
+- name: github.com/golang/protobuf
+  version: 925541529c1fa6821df4e44ce2723319eb2be768
+  subpackages:
+  - proto
+  - ptypes
+  - ptypes/any
+  - ptypes/duration
+  - ptypes/timestamp
+- name: golang.org/x/net
+  version: 07e8617a6db2368fa55d4616f371ee1b1403c817
+  subpackages:
+  - context
+  - http2
+  - http2/hpack
+  - idna
+  - internal/timeseries
+  - lex/httplex
+  - trace
+- name: golang.org/x/text
+  version: 88f656faf3f37f690df1a32515b479415e1a6769
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
+- name: google.golang.org/genproto
+  version: df60624c1e9b9d2973e889c7a1cff73155da81c4
+  subpackages:
+  - googleapis/rpc/status
+- name: google.golang.org/grpc
+  version: 8e4536a86ab602859c20df5ebfd0bd4228d08655
+  subpackages:
+  - balancer
+  - balancer/base
+  - balancer/roundrobin
+  - codes
+  - connectivity
+  - credentials
+  - encoding
+  - encoding/proto
+  - grpclb/grpc_lb_v1/messages
+  - grpclog
+  - internal
+  - keepalive
+  - metadata
+  - naming
+  - peer
+  - resolver
+  - resolver/dns
+  - resolver/passthrough
+  - stats
+  - status
+  - tap
+  - transport
+testImports: []
