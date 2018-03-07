@@ -6,16 +6,16 @@ import (
 	pb "github.com/gaku3601/study-grpc/server/pb"
 )
 
-func DecodeGRPCAdminRequest(ctx context.Context, r interface{}) (interface{}, error) {
-	req := r.(*pb.GetAdminInfoMessage)
-	return GetAdminInfoMessage{
+func DecodeGetAdminInfoRequest(ctx context.Context, r interface{}) (interface{}, error) {
+	req := r.(*pb.GetAdminInfoRequest)
+	return GetAdminInfoRequest{
 		TargetAdminName: req.TargetAdminName,
 	}, nil
 }
 
-func EncodeGRPCAdminResponse(_ context.Context, r interface{}) (interface{}, error) {
-	resp := r.(AdminInfoResponse)
-	return &pb.AdminInfoResponse{
+func EncodeGetAdminInfoResponse(_ context.Context, r interface{}) (interface{}, error) {
+	resp := r.(GetAdminInfoResponse)
+	return &pb.GetAdminInfoResponse{
 		Name: resp.Name,
 		Age:  resp.Age,
 	}, nil

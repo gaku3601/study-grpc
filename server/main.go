@@ -23,7 +23,7 @@ func main() {
 
 	// creating Endpoints struct
 	endpoints := Endpoints{
-		AdminEndpoint: MakeGetAdmininfoEndpoint(svc),
+		AdminEndpoint: MakeGetAdminInfoEndpoint(svc),
 	}
 
 	//execute grpc server
