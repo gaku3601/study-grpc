@@ -16,7 +16,7 @@ func main() {
 	}
 	defer conn.Close()
 	client := pb.NewAdminClient(conn)
-	message := &pb.GetAdminInfoMessage{"testoo!"}
+	message := &pb.GetAdminInfoRequest{"こんちゃす!"}
 	res, err := client.GetAdminInfo(context.TODO(), message)
 	fmt.Printf("%#v\n", res.Name)
 	fmt.Printf("%#v\n", res.Age)

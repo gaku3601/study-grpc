@@ -1,8 +1,8 @@
 hash: fd6f271f78f2ddd13ae7764f15df268dd78ec14d5e58c371312e723d60b298d0
-updated: 2018-03-08T07:51:17.662433891+09:00
+updated: 2018-03-08T08:09:52.636503952+09:00
 imports:
 - name: github.com/gaku3601/study-grpc
-  version: 8538b045879d7ad8bf195d784e57e506e7e6ffe4
+  version: 28d0e535df2e7158f515e2bb5e2cbc437699a8c9
   subpackages:
   - server/pb
 - name: github.com/golang/protobuf
