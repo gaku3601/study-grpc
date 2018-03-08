@@ -21,7 +21,7 @@ func main() {
 	errChan := make(chan error)
 
 	endpoints := Endpoints{
-		AdminEndpoint: MakeGetAdminInfoEndpoint(svc),
+		GetAdminInfoEndpoint: MakeGetAdminInfoEndpoint(svc),
 	}
 
 	go func() {

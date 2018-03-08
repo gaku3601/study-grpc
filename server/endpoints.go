@@ -7,7 +7,7 @@ import (
 )
 
 type Endpoints struct {
-	AdminEndpoint endpoint.Endpoint
+	GetAdminInfoEndpoint endpoint.Endpoint
 }
 
 func MakeGetAdminInfoEndpoint(a AdminService) endpoint.Endpoint {
@@ -21,15 +21,6 @@ func MakeGetAdminInfoEndpoint(a AdminService) endpoint.Endpoint {
 	}
 }
 
-func (e Endpoints) Admin(ctx context.Context, targetAdminName string) (string, string) {
-	req := GetAdminInfoRequest{
-		TargetAdminName: targetAdminName,
-	}
-	resp, _ := e.AdminEndpoint(ctx, req)
-	adminResp := resp.(GetAdminInfoResponse)
-	return adminResp.Name, adminResp.Age
-}
-
 //request
 type GetAdminInfoRequest struct {
 	TargetAdminName string
@@ -37,6 +28,6 @@ type GetAdminInfoRequest struct {
 
 //response
 type GetAdminInfoResponse struct {
-	Name string `json:"name"`
-	Age  string `json:"age"`
+	Name string
+	Age  string
 }

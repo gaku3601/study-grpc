@@ -7,11 +7,11 @@ import (
 )
 
 type grpcServer struct {
-	admin grpctransport.Handler
+	getAdminInfo grpctransport.Handler
 }
 
 func (s *grpcServer) GetAdminInfo(ctx context.Context, r *pb.GetAdminInfoRequest) (*pb.GetAdminInfoResponse, error) {
-	_, resp, err := s.admin.ServeGRPC(ctx, r)
+	_, resp, err := s.getAdminInfo.ServeGRPC(ctx, r)
 	if err != nil {
 		return nil, err
 	}
@@ -20,8 +20,8 @@ func (s *grpcServer) GetAdminInfo(ctx context.Context, r *pb.GetAdminInfoRequest
 
 func NewGRPCServer(ctx context.Context, endpoint Endpoints) pb.AdminServer {
 	return &grpcServer{
-		admin: grpctransport.NewServer(
-			endpoint.AdminEndpoint,
+		getAdminInfo: grpctransport.NewServer(
+			endpoint.GetAdminInfoEndpoint,
 			DecodeGetAdminInfoRequest,
 			EncodeGetAdminInfoResponse,
 		),
