@@ -20,17 +20,13 @@ func main() {
 	svc = impl{}
 	errChan := make(chan error)
 
-	endpoints := Endpoints{
-		GetAdminInfoEndpoint: MakeGetAdminInfoEndpoint(svc),
-	}
-
 	go func() {
 		listener, err := net.Listen("tcp", ":19003")
 		if err != nil {
 			errChan <- err
 			return
 		}
-		handler := NewGRPCServer(ctx, endpoints)
+		handler := NewGRPCServer(ctx, New(svc))
 		gRPCServer := grpc.NewServer()
 		pb.RegisterAdminServer(gRPCServer, handler)
 		errChan <- gRPCServer.Serve(listener)
@@ -42,10 +38,5 @@ func main() {
 		errChan <- fmt.Errorf("%s", <-c)
 	}()
 
-	go func() {
-		c := make(chan os.Signal, 1)
-		signal.Notify(c, syscall.SIGINT, syscall.SIGTERM)
-		errChan <- fmt.Errorf("%s", <-c)
-	}()
 	fmt.Println(<-errChan)
 }
